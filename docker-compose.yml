@@ -3,7 +3,7 @@ version: '3'
 services:
 
   mtproxy:
-    image: alexdoesh/mtproxy
+    image: terry6394/mtproxy
     container_name: mtproxy
     restart: always
     # command: --add --your --commands

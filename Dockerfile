@@ -1,7 +1,6 @@
 FROM alpine:3.6
-
-# Uncomment if local sources
-# COPY ./MTProxy /mtproxy/sources
+LABEL maintainer="lualua" \
+      description="Telegram Messenger MTProto zero-configuration proxy server."
 
 COPY ./patches /mtproxy/patches
 
@@ -18,9 +17,6 @@ RUN apk add --no-cache --virtual .build-deps \
     # && apk del .build-deps
 
 FROM alpine:3.6
-LABEL maintainer="Alex Doe <alex@doe.sh>" \
-      description="Telegram Messenger MTProto zero-configuration proxy server."
-
 RUN apk add --no-cache curl \
   && apk update \
   && apk upgrade apk --no-cache \
@@ -39,7 +35,7 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD [ \
   "--port", "2398", \
   "--http-ports", "443", \
-  "--slaves", "2", \
+  "--slaves", "1", \
   "--max-special-connections", "60000", \
   "--allow-skip-dh" \
 ]
